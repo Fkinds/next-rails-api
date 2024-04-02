@@ -1,7 +1,15 @@
 class Public::RegistrationsController < DeviseTokenAuth::RegistrationsController
 
+    def after_sign_up_path_for(resource)
+        root
+    end
+
     def create
         super 
+    end
+
+    def new
+        super
     end
 
     private

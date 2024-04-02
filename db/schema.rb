@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_02_064120) do
+ActiveRecord::Schema.define(version: 2024_04_02_114844) do
 
-  create_table "customers", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "address", null: false
+    t.string "zip_code", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "customer_id", null: false
+    t.integer "amount", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -24,18 +41,16 @@ ActiveRecord::Schema.define(version: 2024_04_02_064120) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name"
-    t.string "nickname"
-    t.string "image"
-    t.string "email"
-    t.string "last_name"
-    t.string "last_name_kana"
-    t.string "first_name"
-    t.string "first_name_kana"
-    t.string "zip_code"
-    t.string "address"
-    t.string "phone_number"
-    t.string "confirm_success_url"
+    t.string "email", null: false
+    t.string "last_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name", null: false
+    t.string "first_name_kana", null: false
+    t.string "zip_code", null: false
+    t.string "address", null: false
+    t.string "phone_number", null: false
+    t.string "confirm_success_url", null: false
+    t.boolean "is_deleted", default: false, null: false
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -45,8 +60,41 @@ ActiveRecord::Schema.define(version: 2024_04_02_064120) do
     t.index ["uid", "provider"], name: "index_customers_on_uid_and_provider", unique: true
   end
 
-  create_table "posts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "title"
+  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "genre_id", null: false
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.text "introduction", null: false
+    t.boolean "is_sold", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "making_status", default: 0, null: false
+    t.integer "amount", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "address", null: false
+    t.string "zip_code", null: false
+    t.string "name", null: false
+    t.integer "payment_method", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "total_payment", null: false
+    t.integer "postage", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

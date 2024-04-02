@@ -29,19 +29,16 @@ class DeviseTokenAuthCreateCustomers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name
-      t.string :nickname
-      t.string :image
-      t.string :email
-
-      t.string :last_name
-      t.string :last_name_kana
-      t.string :first_name
-      t.string :first_name_kana
-      t.string :zip_code
-      t.string :address
-      t.string :phone_number
-      t.string :confirm_success_url
+      t.string :email, null: false
+      t.string :last_name, null: false
+      t.string :last_name_kana, null: false
+      t.string :first_name, null: false
+      t.string :first_name_kana, null: false
+      t.string :zip_code, null: false
+      t.string :address, null: false
+      t.string :phone_number, null: false
+      t.string :confirm_success_url, null: false
+      t.boolean :is_deleted, null: false, default: false
 
       ## Tokens
       t.text :tokens
