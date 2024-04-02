@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-  resources :posts
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  mount_devise_token_auth_for 'Customer', at: 'auth', controllers:{
+    registrations: 'public/registrations'
+  }
+
+  namespace :auth do 
+    resources :sessions, only: [:index]
+  end
 end
