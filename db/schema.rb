@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2024_04_02_114844) do
 
-  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "address", null: false
     t.string "zip_code", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "customer_id", null: false
     t.integer "amount", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "customers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "customers", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,13 +60,13 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
     t.index ["uid", "provider"], name: "index_customers_on_uid_and_provider", unique: true
   end
 
-  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "items", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "genre_id", null: false
     t.string "name", null: false
     t.integer "price", null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "order_details", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "item_id", null: false
     t.integer "making_status", default: 0, null: false
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "address", null: false
     t.string "zip_code", null: false
