@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     get "orders/complete" => "orders#complete"
     resources :orders, execpt: [:update, :destroy, :edit]
     resources :addresses, except: [:show, :new]
+    resources :genres
   end
 end
