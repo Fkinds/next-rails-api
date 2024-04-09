@@ -1,5 +1,6 @@
 class Public::SessionsController < DeviseTokenAuth::SessionsController
     before_action :configure_sign_in_params, only: [:create]
+    # skip_before_action :verify_authenticity_token, only: [:create]
 
     def after_sign_up_path_for(resource)
         root
@@ -7,8 +8,9 @@ class Public::SessionsController < DeviseTokenAuth::SessionsController
 
     def create 
         customer = Customer.find_by(email: params[:email])
+        
         if customer && customer.valid_password?(params[:password])
-
+            session[:customer_id] = customer.id
             token = customer.create_new_auth_token
 
             render json: {

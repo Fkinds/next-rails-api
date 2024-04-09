@@ -1,4 +1,5 @@
 class Public::RegistrationsController < DeviseTokenAuth::RegistrationsController
+    # skip_before_action :verify_authenticity_token, only: [:create]
 
     def after_sign_up_path_for(resource)
         root
@@ -9,7 +10,7 @@ class Public::RegistrationsController < DeviseTokenAuth::RegistrationsController
     end
 
     def new
-        super
+        
     end
 
     private

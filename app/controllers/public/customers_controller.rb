@@ -1,13 +1,15 @@
 class Public::CustomersController < ApplicationController
-  def session
-    uid = request.headers['uid']
-    if uid 
-      data = "aaaa"
-      render json: data
+  def set_customer
+    receive_customer_id = session[:customer_id]
+    current_customer = Customer.find(receive_customer_id)
+    if current_customer
+      render json: current_customer
     else
       render status: 1
     end 
-    # @customer = Customer.find_by_uid(uid)
-    # render status: 200, json: @customer
   end
+
+  def show
+
+  end  
 end
