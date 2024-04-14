@@ -17,7 +17,8 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.cache_store = :memory_store
+    # config.cache_store = :memory_store
+    config.cache_store = :redis_cache_store, { expires_in: 1.day, url: 'redis://redis:6379/0' }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -63,8 +64,9 @@ Rails.application.configure do
   
   # localhost:3000では通信に失敗するためhostをdocker-compose.ymlのコンテナ名に合わせる
   
-  # config.hosts << "api"
-  config.hosts.clear
+  config.hosts << "api"
+  # # config.hosts.clear
+  # config.hosts << "next-rails-root-api"
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 

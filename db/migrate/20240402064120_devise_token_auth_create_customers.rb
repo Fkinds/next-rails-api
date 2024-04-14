@@ -37,7 +37,7 @@ class DeviseTokenAuthCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :zip_code, null: false
       t.string :address, null: false
       t.string :phone_number, null: false
-      t.string :confirm_success_url, null: false
+      t.string :confirm_success_url, null: false, default: "http://localhost:3000"
       t.boolean :is_deleted, null: false, default: false
 
       ## Tokens

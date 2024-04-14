@@ -7,10 +7,10 @@ class Public::SessionsController < DeviseTokenAuth::SessionsController
     end
 
     def create 
+        reset_session
         customer = Customer.find_by(email: params[:email])
-        
+        session[:customer_id] = customer.id
         if customer && customer.valid_password?(params[:password])
-            session[:customer_id] = customer.id
             token = customer.create_new_auth_token
 
             render json: {
@@ -32,10 +32,11 @@ class Public::SessionsController < DeviseTokenAuth::SessionsController
         access_token = request.headers['access-token']
 
         # トークン情報を使用してユーザーを特定し、トークンを無効化する
-        customer = Customer.find_by_uid(uid)
-        customer.tokens.delete(client_id) if customer
+        customer = Customer.find_by(id: session[:customer_id])
+        customer.tokens.delete(client_id) && reset_session if customer
 
-        if customer.present? && customer.save 
+        if customer.present? && customer.save
+            reset_session
             render json: { message: 'ログアウトしました' }
         else 
             render json: { errors: ['ログアウトに失敗しました']}, status: :unprocessable_entity

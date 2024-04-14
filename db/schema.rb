@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
     t.string "zip_code", null: false
     t.string "address", null: false
     t.string "phone_number", null: false
-    t.string "confirm_success_url", null: false
+    t.string "confirm_success_url", default: "http://localhost:3000", null: false
     t.boolean "is_deleted", default: false, null: false
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
