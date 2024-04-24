@@ -7,14 +7,12 @@ class Public::SessionsController < DeviseTokenAuth::SessionsController
     end
 
     def create 
-        reset_session
-        customer = Customer.find_by(email: params[:email])
-        session[:customer_id] = customer.id
-        if customer && customer.valid_password?(params[:password])
-            token = customer.create_new_auth_token
+        @customer = Customer.find_by(email: params[:email])
+        if @customer && @customer.valid_password?(params[:password])
+            token = @customer.create_new_auth_token
 
             render json: {
-                data: customer.as_json.merge({
+                data: @customer.as_json.merge({
                     access_token: token['access-token'],
                     client: token['client'],
                     uid: token['uid']
@@ -32,7 +30,8 @@ class Public::SessionsController < DeviseTokenAuth::SessionsController
         access_token = request.headers['access-token']
 
         # トークン情報を使用してユーザーを特定し、トークンを無効化する
-        customer = Customer.find_by(id: session[:customer_id])
+        customer = Customer.find_by(id: sessioin[:customer_id])
+        session[:customer_id].clear
         customer.tokens.delete(client_id) && reset_session if customer
 
         if customer.present? && customer.save

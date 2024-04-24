@@ -8,7 +8,6 @@ class Public::RegistrationsController < DeviseTokenAuth::RegistrationsController
   def create
     @customer = Customer.new(sign_up_params)
     if @customer.save!
-      session[:customer_id] = @customer.id
       render json: @customer, status: 200
     else 
       render json: @customer.errors, status: 500

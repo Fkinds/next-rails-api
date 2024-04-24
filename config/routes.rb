@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+    # get "customers/token" => "customers#set_token"
     get "customers/session" => "customers#set_customer"
     get "about" => "homes#about", as: "about"
     get "customers/my_page" => "customers#show", as: "my_page"

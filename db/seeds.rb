@@ -4,21 +4,24 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-unless Customer.exists?(id: 1 ... 10)
-  10.times do |n|
-		Customer.create!(
-      # n + 1で数字が重複しないようにする
-      email: "test#{n + 1}@test.com",
-      first_name: "田中#{n + 1}",
-      first_name_kana: "タナカ#{n + 1}",
-      last_name: "太郎#{n + 1}",
-      last_name_kana: "タロウ#{n + 1}",
-      zip_code: "ddd#{n + 1}",
-      address: "sss#{n + 1}",
-			phone_number: "xxx#{n + 1}",
-      password: "password",
-			confirm_success_url: "http://localhost:3000"
-    )
+#   Character.create(name: 'Luke', movie: movies.first)  
+  unless Genre.exists?(id: 1 ... 10)
+    10.times do |n|
+      Genre.create!(
+        name: "name#{n + 1}"
+      )
+    end
   end
-end
+  
+  unless Item.exists?(id: 1 ... 10)
+    10.times do |n|
+      Item.create!(
+        # genre_id: Genre.find_by(name: "name#{n + 1}").id,
+        genre_id: Genre.find("#{n+1}").id,
+        name: "item#{n + 1}",
+        price: "1000#{n + 1}",
+        introduction: "test#{n + 1}",
+        is_sold: "false"
+      )
+    end
+  end
