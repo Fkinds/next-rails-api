@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     post "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
     resources :orders, execpt: [:update, :destroy, :edit]
-    resources :addresses, except: [:show, :new]
+    resources :addresses, except: [:new]
   end
 end

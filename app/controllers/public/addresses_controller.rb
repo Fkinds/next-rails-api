@@ -14,6 +14,11 @@ class Public::AddressesController < ApplicationController
     end
   end
 
+  def show
+    address = Address.find(params[:id])
+    render json: address
+  end
+  
   private
   def address_params
     params.permit(:address, :name, :zip_code, :customer_id)
