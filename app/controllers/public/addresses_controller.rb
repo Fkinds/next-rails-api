@@ -6,7 +6,7 @@ class Public::AddressesController < ApplicationController
   end
   
   def create
-    address = Address.new(address_params)
+    address = Address.new(params_address)
     if address.save!
       render json: address
     else 
@@ -18,9 +18,18 @@ class Public::AddressesController < ApplicationController
     address = Address.find(params[:id])
     render json: address
   end
+
+  def update
+    address = Address.find(params[:id])
+    if address.update(params_address)
+      render json: address
+    else 
+      render json: address.errors
+    end
+  end
   
   private
-  def address_params
+  def params_address
     params.permit(:address, :name, :zip_code, :customer_id)
   end
 end
