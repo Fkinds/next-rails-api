@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2024_04_02_114844) do
 
   create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "item_id", null: false
-    t.integer "customer_id", null: false
     t.integer "amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
